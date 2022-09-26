@@ -1,0 +1,32 @@
+{
+  "name": "nasa-node-udemy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install": "npm run install-server && npm run install-client",
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "npm-run-all --parallel server client",
+    "test": "npm run test --prefix server & npm run test --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MNGARCIA085/NASA-NODE-UDEMY.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MNGARCIA085/NASA-NODE-UDEMY/issues"
+  },
+  "homepage": "https://github.com/MNGARCIA085/NASA-NODE-UDEMY#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
