@@ -13,6 +13,7 @@ const server = http.createServer(app);
 // ahora esperamos que la funci[on de carga de planetas se complete antes 
 // escuchar y responder solicitudes
 async function startServer(){
+    console.log('iniciando');
     await loadPlanetsData();
     server.listen(PORT, () => {
         console.log(` Listening in the port ${PORT}  `)
