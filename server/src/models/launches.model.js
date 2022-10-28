@@ -1,5 +1,8 @@
 // mapa que contendrá todos los lanzamientos
 const launches = new Map();
+
+// id de lanzamiento
+let lastestFlightNumber = 100; // valor inicial
  
  
 // un lanzamiento en particular
@@ -17,9 +20,34 @@ const launch = {
  
 // le ingresamos el lanzamiento particular a launches
 launches.set(launch.fligthNumber,launch); // par clave-valor
- 
- 
+
+
+
+// obtener todos los lanzamientos
+function getAllLaunches(){
+    return Array.from(launches.values());
+}
+
+
+
+// agregar un nuevo lanzamiento
+function addNewLaunch(launch){
+    lastestFlightNumber++; // le sumo 1 al [utimo flight number
+    // agrego el lanzamiento, valores: id, objeto
+    launches.set(lastestFlightNumber,
+            Object.assign (launch, { // le agrego valores al objeto
+                                flightNumber: lastestFlightNumber, // asigno id
+                                customer: ['ZTM', 'NASA'], // default
+                                upcoming:true, // default
+                                success:true, // default
+            }))
+}
+
+
+
 // exportamos para que se pueda usar desde otro lado
 module.exports = {
-    launches
+    //launches,
+    getAllLaunches,
+    addNewLaunch
 }
