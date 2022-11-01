@@ -3,6 +3,12 @@ const {parse} = require('csv-parse');
 const fs = require('fs');
  
 const habitablePlanets = [];
+
+
+
+
+
+
  
 function isHabitablePlanet(planet) {
   return planet['koi_disposition'] === 'CONFIRMED'

@@ -22,7 +22,7 @@ function httpAddNewLaunch(req,res){
 
 
     // valido datos obligatorios
-    if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.destination ){
+    if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target ){
         return res.status(400).json({
             error: 'Missing required fields'
         })

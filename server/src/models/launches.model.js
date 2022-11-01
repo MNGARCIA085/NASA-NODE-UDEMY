@@ -10,7 +10,8 @@ const launch = {
     mission:'dsfs',
     rocket:'dsfds',
     launchDate:new Date('December 27, 2030'),
-    destination:'32423',
+    //destination:'32423',
+    target:'fsdfdsf',
     fligthNumber: 100, // id único
     customer: ['NASA', 'ztm'],
     upcoming:true,
