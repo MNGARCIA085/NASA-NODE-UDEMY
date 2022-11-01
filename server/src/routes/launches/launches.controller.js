@@ -21,22 +21,18 @@ function httpGetAllLaunches (req, res) {
  
 function httpAddNewLaunch(req,res){
     const launch = req.body;
-
-
     // valido datos obligatorios
     if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target ){
         return res.status(400).json({
             error: 'Missing required fields'
         })
     }
-
-
     // convierto a fecha launchDate (pues llega como str)
     launch.launchDate = new Date(launch.launchDate);
     // agrego
     addNewLaunch(launch);
     // respuesta
-    res.status(200).json(launch);
+    res.status(201).json(launch);
 }
 
 
