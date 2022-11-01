@@ -1,7 +1,9 @@
 //const {launches} = require('../../models/launches.model');
 const {
     getAllLaunches ,
-    addNewLaunch
+    addNewLaunch,
+    existLaunchById,
+    abortLaunchById
 } = require('../../models/launches.model');
 
 
@@ -37,10 +39,32 @@ function httpAddNewLaunch(req,res){
     res.status(200).json(launch);
 }
 
+
+
+
+ 
+// delete
+function httpAbortLaunch(req,res){
+    const launchId = Number(req.params.id);
+   
+    if (!existLaunchById(launchId)) {
+        return res.status(404).json({
+            error:'No existe el lanzamiento'
+        })
+    } else {
+        const aborted = abortLaunchById(launchId);
+        return res.status(200).json(aborted);
+    }
+}
+
+
+
+
  
 module.exports = {
     httpGetAllLaunches,
-    httpAddNewLaunch
+    httpAddNewLaunch,
+    httpAbortLaunch
 }
 
 
