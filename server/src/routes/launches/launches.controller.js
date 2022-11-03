@@ -1,25 +1,20 @@
 //const {launches} = require('../../models/launches.model');
 const {
     getAllLaunches ,
-    addNewLaunch,
-    existLaunchById,
+    scheduleNewLaunch,
+    existsLaunchWithId,
     abortLaunchById
 } = require('../../models/launches.model');
 
 
-/**
-function getAllLaunches (req, res) {
-    return res.status(200).json(Array.from(launches.values()));
-}
-*/
 
-function httpGetAllLaunches (req, res) {
-    return res.status(200).json(getAllLaunches());
+// obtener todos los lanzamientos
+async function httpGetAllLaunches (req, res) {
+    return res.status(200).json(await getAllLaunches());
 }
- 
- 
- 
-function httpAddNewLaunch(req,res){
+
+// agregar un nuevo lanzamiento 
+async function httpAddNewLaunch(req,res){
     const launch = req.body;
     // valido datos obligatorios
     if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target ){
@@ -30,28 +25,37 @@ function httpAddNewLaunch(req,res){
     // convierto a fecha launchDate (pues llega como str)
     launch.launchDate = new Date(launch.launchDate);
     // agrego
-    addNewLaunch(launch);
+    await scheduleNewLaunch(launch);
     // respuesta
     res.status(201).json(launch);
 }
 
-
-
-
  
 // delete
-function httpAbortLaunch(req,res){
+async function httpAbortLaunch(req, res) {
+ 
     const launchId = Number(req.params.id);
-   
-    if (!existLaunchById(launchId)) {
-        return res.status(404).json({
-            error:'No existe el lanzamiento'
-        })
-    } else {
-        const aborted = abortLaunchById(launchId);
-        return res.status(200).json(aborted);
+    console.log(launchId);
+     // chequeo que exista
+    const existsLaunch = await existsLaunchWithId(launchId);
+    if (!existsLaunch) {
+      return res.status(404).json({
+        error: 'Launch not found',
+      });
     }
-}
+     // si no se pudo cancelar
+    const aborted = await abortLaunchById(launchId);
+    if (!aborted) {
+      return res.status(400).json({
+        error: 'Launch not aborted',
+      });
+    }
+     // si todo salio bien
+    return res.status(200).json({
+      ok: true,
+    });
+  }
+ 
 
 
 
