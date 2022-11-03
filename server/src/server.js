@@ -1,7 +1,6 @@
 const http = require('http');
-const mongoose = require('mongoose');
-require('dotenv').config();
- 
+const { mongoConnect} = require('./services/mongo');
+
 const app = require('./app'); // es la app de express
 
 // importo la fn. de carga de planetas
@@ -19,27 +18,15 @@ const server = http.createServer(app);
 
 
 async function startServer(){
-    await mongoose.connect(MONGO_URL);
-    //
-    await loadPlanetsData();
-    server.listen(PORT, () => {
-        console.log(` Listening in the port ${PORT}  `)
-    })
- }
+   // me conecto a mongo
+   await mongoConnect();
+   // cargo los planetas
+   await loadPlanetsData();
+   server.listen(PORT, () => {
+       console.log(` Listening in the port ${PORT}  `)
+   })
+}
+
   
-  
-  
- // chequeo la conexión
- mongoose.connection.once('open', ()=> {
-    console.log('MongoDB ready');
- })
-  
-  
- // si hay errores
- mongoose.connection.on('error', (err) => {
-    console.error(err);
- })
- 
- 
 startServer();
  
