@@ -15,7 +15,7 @@
     "watch": "npm-run-all --parallel server client",
     "deploy": "npm run build --prefix client && npm start --prefix server",
     "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix server",
-    "test": "npm run test --prefix server & npm run test --prefix client"
+    "test": "npm run test --prefix server"
   },
   "repository": {
     "type": "git",
