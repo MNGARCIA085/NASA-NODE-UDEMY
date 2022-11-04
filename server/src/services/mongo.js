@@ -4,9 +4,6 @@ const mongoose = require('mongoose');
 // Update below to match your own MongoDB connection string.
 
 
-console.log(process.env.MONGO_URL);
-
-
 const MONGO_URL = process.env.MONGO_URL;
 
 

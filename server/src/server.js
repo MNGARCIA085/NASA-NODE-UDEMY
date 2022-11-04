@@ -1,5 +1,6 @@
 const http = require('http');
 const { mongoConnect} = require('./services/mongo');
+const { loadLaunchData } = require('./models/launches.model');
 
 const app = require('./app'); // es la app de express
 
@@ -22,6 +23,10 @@ async function startServer(){
    await mongoConnect();
    // cargo los planetas
    await loadPlanetsData();
+
+    // cargo los datos desde la API de Space X
+    await loadLaunchData();
+
    server.listen(PORT, () => {
        console.log(` Listening in the port ${PORT}  `)
    })
