@@ -15,9 +15,9 @@ describe('Launches API', () => {
     })
 
     //
-    //afterAll( async() => {
-    //    await mongoDisconnect();
-    //})
+    afterAll( async() => {
+        await mongoDisconnect();
+    })
 
     
     
