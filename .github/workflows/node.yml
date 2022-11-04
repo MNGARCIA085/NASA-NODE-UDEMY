@@ -1,0 +1,28 @@
+name: NASA PROJECT CI   # nombre del workflow
+ 
+on:  # triggers, lo que se ejecuta cuando hago por ejemplo un push o un pull request
+ # en este caso se ejecuta cuando se hace un push en la rama master
+ push:
+   branches: [master]  
+ # se ejecuta cuando se hace un pull request a la rama master
+ pull_request:
+   branches: [master]  
+ 
+ 
+jobs:
+ build:
+   runs-on: ubuntu-latest # el job se ejecuta en la última versión de ubuntu
+ # si tuviese CI/CD
+ #deploy:
+ # needs: build; esto para que sea secuencial, primero build y dsp. deploy; si no
+ # pongo lo hace en paralelo
+   steps:
+     - uses: actions/checkout@v2       # fn. incorporada de github para chequear que use el último código
+      # instalamos la versión 16 de Node
+     - name: Use Node.js v16
+       uses: actions/setup-node@v2
+       with:
+         node-version: '16'
+     # ahora mis propios comandos
+     - run : npm install
+     - run: npm run build --prefix client # para el front
